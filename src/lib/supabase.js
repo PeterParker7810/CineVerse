@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const url = import.meta.env?.VITE_SUPABASE_URL;
+const anonKey = import.meta.env?.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = url && anonKey ? createClient(url, anonKey, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
@@ -33,3 +33,4 @@ export async function removeWishlist(userId, item) {
     .eq('media_id', String(item.id)).eq('media_type', item.type === 'Series' ? 'tv' : 'movie');
   if (error) throw error;
 }
+
